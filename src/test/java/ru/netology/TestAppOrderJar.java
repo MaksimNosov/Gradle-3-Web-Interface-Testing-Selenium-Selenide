@@ -8,13 +8,32 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAppOrderJar {
-    private WebDriver driver;
+//    private WebDriver driver;
+//
+//    @BeforeAll
+//    static void setUpAll() {
+//        System.setProperty("webdriver.chrome.driver", "drivers/win/chromedriver.exe");
+//    }
+//
+//    @BeforeEach
+//    void setUp() {
+//        driver = new ChromeDriver();
+//    }
+//
+//    @AfterEach
+//    void tearDown() {
+//        driver.quit();
+//        driver = null;
+//    }
+
+        private WebDriver driver;
 
     @BeforeAll
     static void setUpAll() {
@@ -23,7 +42,11 @@ public class TestAppOrderJar {
 
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
@@ -31,6 +54,8 @@ public class TestAppOrderJar {
         driver.quit();
         driver = null;
     }
+
+
 
     @Test
     void shouldTestV1() {
