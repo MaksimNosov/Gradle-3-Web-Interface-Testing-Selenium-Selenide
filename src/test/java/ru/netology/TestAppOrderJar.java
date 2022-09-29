@@ -35,17 +35,19 @@ public class TestAppOrderJar {
 
     WebDriver driver;
 
-    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker()
-            .enableVnc().enableRecording();
+    @BeforeAll
+    static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeEach
-    void setup() {
-        driver = wdm.create();
+    void setupTest() {
+        driver = new ChromeDriver();
     }
 
     @AfterEach
     void teardown() {
-        wdm.quit();
+        driver.quit();
     }
 
     @Test
