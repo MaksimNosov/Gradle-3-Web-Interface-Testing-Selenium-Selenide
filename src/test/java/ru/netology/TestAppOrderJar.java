@@ -35,14 +35,29 @@ public class TestAppOrderJar {
 
     WebDriver driver;
 
+    @BeforeAll
+    static void setupAll() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeEach
     void setup() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+//        driver = new ChromeDriver();
     }
 
     @AfterEach
     void teardown() {
         driver.quit();
+    }
+
+    @Test
+    void test() {
+        // Your test logic here
     }
 
     @Test
