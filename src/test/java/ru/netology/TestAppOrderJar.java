@@ -50,7 +50,7 @@ public class TestAppOrderJar {
 
     @Test
     void shouldTestV1() {
-        driver.get("http://localhost:9999/");
+        driver.get("https://bonigarcia.dev/selenium-webdriver-java/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Точно как в паспорте");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998889988");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
