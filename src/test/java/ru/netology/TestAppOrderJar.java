@@ -16,21 +16,36 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAppOrderJar {
+//    WebDriver driver;
+//
+//    @BeforeAll
+//    static void setupAll() {
+//        WebDriverManager.chromedriver().setup();
+//    }
+//
+//    @BeforeEach
+//    void setup() {
+//        driver = new ChromeDriver();
+//    }
+//
+//    @AfterEach
+//    void teardown() {
+//        driver.quit();
+//    }
+
     WebDriver driver;
 
-    @BeforeAll
-    static void setupAll() {
-        WebDriverManager.chromedriver().setup();
-    }
+    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker()
+            .enableVnc().enableRecording();
 
     @BeforeEach
     void setup() {
-        driver = new ChromeDriver();
+        driver = wdm.create();
     }
 
     @AfterEach
     void teardown() {
-        driver.quit();
+        wdm.quit();
     }
 
     @Test
