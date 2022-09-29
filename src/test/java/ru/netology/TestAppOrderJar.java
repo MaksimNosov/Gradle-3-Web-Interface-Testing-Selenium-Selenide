@@ -35,24 +35,22 @@ public class TestAppOrderJar {
 
     WebDriver driver;
 
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+    WebDriverManager wdm = WebDriverManager.chromedriver().browserInDocker()
+            .enableVnc().enableRecording();
 
     @BeforeEach
-    void setupTest() {
-        driver = new ChromeDriver();
+    void setup() {
+        driver = wdm.create();
     }
 
     @AfterEach
     void teardown() {
-        driver.quit();
+        wdm.quit();
     }
 
     @Test
     void shouldTestV1() {
-        driver.get("http://localhost:7777/");
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Точно как в паспорте");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998889988");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
