@@ -1,5 +1,6 @@
 package ru.netology;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,54 +16,26 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAppOrderJar {
-//    private WebDriver driver;
-//
-//    @BeforeAll
-//    static void setUpAll() {
-//        System.setProperty("webdriver.chrome.driver", "drivers/win/chromedriver.exe");
-//    }
-//
-//    @BeforeEach
-//    void setUp() {
-//        driver = new ChromeDriver();
-//    }
-//
-//    @AfterEach
-//    void tearDown() {
-//        driver.quit();
-//        driver = null;
-//    }
-
-        private WebDriver driver;
+    WebDriver driver;
 
     @BeforeAll
-    static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "drivers/win/chromedriver.exe");
+    static void setupAll() {
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
-    void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+    void setup() {
+        driver = new ChromeDriver();
     }
 
     @AfterEach
-    void tearDown() {
+    void teardown() {
         driver.quit();
-        driver = null;
     }
-
-
 
     @Test
     void shouldTestV1() {
         driver.get("http://localhost:9999/");
-//        List<WebElement> inputs = driver.findElements(By.tagName("input"));
-//        inputs.get(0).sendKeys("Точно как в паспорте");
-//        inputs.get(1).sendKeys("+79998889988");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Точно как в паспорте");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998889988");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -71,6 +44,4 @@ public class TestAppOrderJar {
         String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
         assertEquals(expected, actual);
     }
-
-
 }
