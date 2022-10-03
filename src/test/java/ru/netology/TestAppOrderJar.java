@@ -7,31 +7,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAppOrderJar {
-//    WebDriver driver;
-//
-//    @BeforeAll
-//    static void setupAll() {
-//        WebDriverManager.chromedriver().setup();
-//    }
-//
-//    @BeforeEach
-//    void setup() {
-//        driver = new ChromeDriver();
-//    }
-//
-//    @AfterEach
-//    void teardown() {
-//        driver.quit();
-//    }
 
     WebDriver driver;
 
@@ -47,7 +29,6 @@ public class TestAppOrderJar {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-//        driver = new ChromeDriver();
     }
 
     @AfterEach
@@ -56,14 +37,9 @@ public class TestAppOrderJar {
     }
 
     @Test
-    void test() {
-        // Your test logic here
-    }
-
-    @Test
     void shouldTestV1() {
         driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Точно как в паспорте");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Составная-Фамилия Имя");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998889988");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button__text")).click();
